@@ -118,6 +118,7 @@
             ></component>
           </div>
         </div>
+        <clone-on-control></clone-on-control>
       </div>
     </div>
   </div>

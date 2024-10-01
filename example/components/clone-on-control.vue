@@ -40,43 +40,47 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import draggable from "../../lib/vuedraggable";
+import { defineOptions, ref } from "vue";
 let idGlobal = 8;
-export default {
+
+defineOptions({
   name: "clone-on-control",
-  display: "Clone on Control",
-  instruction: "Press Ctrl to clone element from list 1",
-  order: 4,
   components: {
     draggable,
   },
-  data() {
-    return {
-      list1: [
-        { name: "Jesus", id: 1 },
-        { name: "Paul", id: 2 },
-        { name: "Peter", id: 3 },
-      ],
-      list2: [
-        { name: "Luc", id: 5 },
-        { name: "Thomas", id: 6 },
-        { name: "John", id: 7 },
-      ],
-      controlOnStart: true,
-    };
-  },
-  methods: {
-    clone({ name }) {
-      return { name, id: idGlobal++ };
-    },
-    pullFunction() {
-      return this.controlOnStart ? "clone" : true;
-    },
-    start({ originalEvent }) {
-      this.controlOnStart = originalEvent.ctrlKey;
-    },
-  },
-};
+  display: "Clone on Control",
+  instruction: "Press Ctrl to clone element from list 1",
+  order: 4,
+});
+
+let list1 = ref([
+  { name: "Jesus", id: 1 },
+  { name: "Paul", id: 2 },
+  { name: "Peter", id: 3 },
+]);
+let list2 = ref([
+  { name: "Luc", id: 5 },
+  { name: "Thomas", id: 6 },
+  { name: "John", id: 7 },
+]);
+let controlOnStart = ref(true);
+
+function clone(obj) {
+  const { name } = obj;
+
+  return { name, id: idGlobal++ };
+}
+
+function pullFunction() {
+  return controlOnStart.value ? "clone" : true;
+}
+
+function start(event) {
+  const { originalEvent } = event;
+
+  controlOnStart.value = originalEvent.ctrlKey;
+}
 </script>
 <style scoped></style>

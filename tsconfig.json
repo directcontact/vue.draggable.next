@@ -9,10 +9,10 @@
     "downlevelIteration": true,
     "esModuleInterop": true,
     "outDir": "./types",
-    "declaration": true
+    "declaration": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "files": ["lib/vuedraggable.js"],
-  "paths": {
-    "@/*": ["./src/*"]
-  }
+  "files": ["lib/vuedraggable.js"]
 }
