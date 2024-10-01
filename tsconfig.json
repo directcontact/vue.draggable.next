@@ -1,17 +1,18 @@
 {
-    "compilerOptions": {
-        "target": "es2016",
-        "lib":["esnext", "DOM"],
-        "moduleResolution": "node",
-        "allowJs": true,
-        "checkJs": true,
-        "emitDeclarationOnly": true,
-        "downlevelIteration": true,
-        "esModuleInterop": true, 
-        "outDir": "./types",
-        "declaration": true
-    },
-    "files": [
-        "./src/vuedraggable.js"
-    ]
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext", "DOM"],
+    "moduleResolution": "node",
+    "allowJs": true,
+    "checkJs": true,
+    "emitDeclarationOnly": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "outDir": "./types",
+    "declaration": true
+  },
+  "files": ["lib/vuedraggable.js"],
+  "paths": {
+    "@/*": ["./src/*"]
+  }
 }

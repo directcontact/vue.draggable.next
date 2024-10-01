@@ -3,18 +3,16 @@ import App from "./App.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import routes from "./route";
-import rawDisplayer from "./components/infra/raw-displayer";
+import rawDisplayer from "./components/infra/raw-displayer.vue";
 import store from "./store";
 import ElementPlus from "element-plus";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.css";
 import "element-plus/lib/theme-chalk/index.css";
 
-require("bootstrap");
-
 const router = createRouter({
   history: createWebHashHistory("/vue.draggable.next/"),
-  routes
+  routes,
 });
 
 const app = createApp(App)

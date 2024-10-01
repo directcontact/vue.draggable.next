@@ -40,8 +40,8 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
+<script lang="ts">
+import draggable from "../../lib/vuedraggable";
 let idGlobal = 8;
 export default {
   name: "clone-on-control",
@@ -49,21 +49,21 @@ export default {
   instruction: "Press Ctrl to clone element from list 1",
   order: 4,
   components: {
-    draggable
+    draggable,
   },
   data() {
     return {
       list1: [
         { name: "Jesus", id: 1 },
         { name: "Paul", id: 2 },
-        { name: "Peter", id: 3 }
+        { name: "Peter", id: 3 },
       ],
       list2: [
         { name: "Luc", id: 5 },
         { name: "Thomas", id: 6 },
-        { name: "John", id: 7 }
+        { name: "John", id: 7 },
       ],
-      controlOnStart: true
+      controlOnStart: true,
     };
   },
   methods: {
@@ -75,8 +75,8 @@ export default {
     },
     start({ originalEvent }) {
       this.controlOnStart = originalEvent.ctrlKey;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped></style>

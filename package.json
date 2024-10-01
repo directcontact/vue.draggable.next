@@ -9,15 +9,14 @@
     "type": "git",
     "url": "https://github.com/SortableJS/Vue.Draggable.git"
   },
-  "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve ./example/main.js --open --mode local",
-    "build:doc": "vue-cli-service build ./example/main.js --dest docs --mode development",
-    "build": "vue-cli-service build --name vuedraggable --entry ./src/vuedraggable.js --target lib",
-    "lint": "vue-cli-service lint src example",
+    "dev": "vite ./example/main.js",
+    "build:doc": "vite build ./example/main.js --dest docs --mode development",
+    "build": "vite build --name vuedraggable --entry ./src/vuedraggable.js --target lib",
+    "lint": "vite lint src example",
     "prepublishOnly": "npm run lint && npm run test:unit && npm run build:doc && npm run build:type && npm run build",
-    "test:unit": "vue-cli-service test:unit --coverage",
-    "test:coverage": "vue-cli-service test:unit --coverage --verbose && codecov",
+    "test:unit": "vite test:unit --coverage",
+    "test:coverage": "vite test:unit --coverage --verbose && codecov",
     "build:type": "tsc"
   },
   "keywords": [
@@ -32,37 +31,34 @@
     "nested"
   ],
   "dependencies": {
-    "sortablejs": "1.14.0"
+    "pinia": "^2.2.3",
+    "sortablejs": "1.15.3"
   },
   "peerDependencies": {
-    "vue": "^3.0.1"
+    "vue": "^3.5.9"
   },
   "devDependencies": {
-    "@types/sortablejs": "^1.10.7",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "^4.5.4",
-    "@vue/cli-service": "~4.5.0",
+    "@types/sortablejs": "^1.15.8",
+    "@vitejs/plugin-vue": "^5.1.4",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-prettier": "6.0.0",
     "@vue/server-renderer": "^3.0.0",
     "@vue/test-utils": "^2.0.0-beta.6",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.6.0",
+    "@vue/vue3-jest": "28",
+    "autoprefixer": "^10.4.20",
     "bootstrap": "^4.3.1",
     "codecov": "^3.2.0",
     "element-plus": "^1.0.1-alpha.12",
-    "eslint": "^6.7.2",
+    "eslint": "^9.11.1",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-vue": "^7.0.0-0",
+    "eslint-plugin-vue": "^9.28.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "typescript": "^4.3.5",
-    "vue": "^3.0.1",
-    "vue-jest": "^5.0.0-alpha.5",
-    "vue-router": "^4.0.0-beta.13",
+    "vite": "^5.4.8",
+    "vue": "^3.5.9",
+    "vue-router": "4.4.5",
     "vuex": "4.0.0-beta.4"
   },
   "eslintConfig": {
@@ -73,11 +69,7 @@
     "extends": [
       "plugin:vue/essential",
       "@vue/prettier"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
+    ]
   },
   "postcss": {
     "plugins": {
@@ -96,5 +88,6 @@
     "types/*",
     "src/*"
   ],
-  "module": "dist/vuedraggable.umd.js"
+  "module": "dist/vuedraggable.umd.js",
+  "packageManager": "yarn@4.5.0"
 }

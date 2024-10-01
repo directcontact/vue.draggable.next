@@ -2,7 +2,7 @@
   <div id="app">
     <a href="https://github.com/SortableJS/vue.draggable.next" target="_blank">
       <img
-        style="position: fixed; top: 0; right: 0; border: 0; z-index:99999"
+        style="position: fixed; top: 0; right: 0; border: 0; z-index: 99999"
         width="149"
         height="149"
         src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149"
@@ -12,7 +12,7 @@
       />
     </a>
 
-    <div class="container ">
+    <div class="container">
       <div class="jumbotron logo">
         <img
           class="draggable"
@@ -97,16 +97,14 @@
           v-for="component in componentList"
           :key="component.name"
         >
-          <div class=" justify-content-center jumbotron main-container">
+          <div class="justify-content-center jumbotron main-container">
             <div class="row icon-container">
               <div>{{ component.instruction }}</div>
 
               <a
                 class="icon github"
                 target="_blank"
-                :href="
-                  `https://github.com/SortableJS/vue.draggable.next/blob/master/example/components/${component.name}.vue`
-                "
+                :href="`https://github.com/SortableJS/vue.draggable.next/blob/master/example/components/${component.name}.vue`"
               >
                 <button class="btn btn-secondary">
                   View code
@@ -115,7 +113,9 @@
               </a>
             </div>
 
-            <component :is="component.name"></component>
+            <component
+              :is="component.name.split('/').pop()?.replace('.vue', '')"
+            ></component>
           </div>
         </div>
       </div>
@@ -123,61 +123,48 @@
   </div>
 </template>
 
-<script>
-import $ from "jquery";
+<script lang="ts" setup>
+import { ref } from "vue";
 
-const requireContext = require.context("./components/", false, /\.vue$/);
-const components = requireContext.keys().reduce((acc, key) => {
-  const component = requireContext(key).default;
-  acc[component.name] = component;
-  return acc;
-}, {});
+let componentList = ref(
+  Object.entries(import.meta.glob("/components/*.vue")).map(
+    (key, entry) => key[1]
+  )
+);
+// import $ from "jquery";
 
-const showAll = process.env.VUE_APP_SHOW_ALL_EXAMPLES === "true";
-if (showAll) {
-  const order = Object.keys(components);
-  const requireContextDebug = require.context(
-    "./debug-components/",
-    false,
-    /\.vue$/
-  );
-  requireContextDebug.keys().reduce((acc, key) => {
-    const component = requireContextDebug(key).default;
-    component.order += order;
-    component.display = `DEBUG: ${component.display}`;
-    acc[component.name] = component;
-    return acc;
-  }, components);
-}
-
-export default {
-  name: "app",
-  components,
-  data() {
-    const componentList = Object.values(components)
-      .filter(component => component.show)
-      .sort((a, b) => a.order - b.order);
-    return {
-      componentList
-    };
-  },
-  mounted() {
-    this.toRoute(this.$route);
-    $('a[data-toggle="tab"]').on("shown.bs.tab", e => {
-      this.$router.push({ path: e.target.dataset.route });
-    });
-  },
-  methods: {
-    toRoute(route) {
-      $(`a[data-route="${route.path}"]`).tab("show");
-    }
-  },
-  watch: {
-    $route: function(route) {
-      this.toRoute(route);
-    }
-  }
-};
+// const showAll = process.env.VUE_APP_SHOW_ALL_EXAMPLES === "true";
+// if (showAll) {
+//   const order = Object.keys(components);
+//   const requireContextDebug = require.context(
+//     "./debug-components/",
+//     false,
+//     /\.vue$/
+//   );
+//   requireContextDebug.keys().reduce((acc, key) => {
+//     const component = requireContextDebug(key).default;
+//     component.order += order;
+//     component.display = `DEBUG: ${component.display}`;
+//     acc[component.name] = component;
+//     return acc;
+//   }, components);
+// }
+// mounted() {
+//   this.toRoute(this.$route);
+//   $('a[data-toggle="tab"]').on("shown.bs.tab", (e) => {
+//     this.$router.push({ path: e.target.dataset.route });
+//   });
+// },
+// methods: {
+//   toRoute(route) {
+//     $(`a[data-route="${route.path}"]`).tab("show");
+//   },
+// },
+// watch: {
+//   $route: function (route) {
+//     this.toRoute(route);
+//   },
+// },
 </script>
 
 <style>
