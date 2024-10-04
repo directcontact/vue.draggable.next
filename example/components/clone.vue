@@ -47,9 +47,6 @@ defineOptions({
   name: "clone",
   display: "Clone",
   order: 2,
-  components: {
-    draggable,
-  },
 });
 
 let list1 = ref([

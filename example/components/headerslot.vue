@@ -42,9 +42,6 @@ defineOptions({
   name: "headerslot",
   display: "Header slot",
   order: 13,
-  components: {
-    draggable,
-  },
 });
 
 let list = ref([

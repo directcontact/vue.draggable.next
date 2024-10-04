@@ -1,4 +1,4 @@
-const tags = [
+const tags: string[] = [
   "a",
   "abbr",
   "address",
@@ -115,18 +115,18 @@ const tags = [
   "ul",
   "var",
   "video",
-  "wbr"
+  "wbr",
 ];
 
-function isHtmlTag(name) {
+function isHtmlTag(name: string) {
   return tags.includes(name);
 }
 
-function isTransition(name) {
+function isTransition(name: string) {
   return ["transition-group", "TransitionGroup"].includes(name);
 }
 
-function isHtmlAttribute(value) {
+function isHtmlAttribute(value: string) {
   return (
     ["id", "class", "role", "style"].includes(value) ||
     value.startsWith("data-") ||

@@ -40,9 +40,6 @@ defineOptions({
   display: "Handle",
   instruction: "Drag using the handle icon",
   order: 5,
-  components: {
-    draggable,
-  },
 });
 
 let list = ref([

@@ -43,9 +43,6 @@ defineOptions({
   name: "footerslot",
   display: "Footer slot",
   order: 12,
-  components: {
-    draggable,
-  },
 });
 
 let list = ref([

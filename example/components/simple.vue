@@ -55,9 +55,6 @@ defineOptions({
   name: "simple",
   display: "Simple",
   order: 0,
-  components: {
-    draggable,
-  },
 });
 
 let enabled = ref(true);

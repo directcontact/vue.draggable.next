@@ -48,9 +48,6 @@ defineOptions({
   name: "custom-clone",
   display: "Custom Clone",
   order: 3,
-  components: {
-    draggable,
-  },
 });
 
 let list1 = ref([

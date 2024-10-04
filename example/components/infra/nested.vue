@@ -28,6 +28,7 @@ defineOptions({
   name: "nested-draggable",
 });
 </script>
+
 <style scoped>
 .dragArea {
   min-height: 50px;
