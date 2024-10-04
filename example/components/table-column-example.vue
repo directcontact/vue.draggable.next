@@ -5,7 +5,7 @@
 
       <table class="table table-striped">
         <thead class="thead-dark">
-          <draggable v-model="headers" tag="tr" :item-key="key => key">
+          <draggable v-model="headers" tag="tr" :item-key="(key) => key">
             <template #item="{ element: header }">
               <th scope="col">
                 {{ header }}
@@ -27,28 +27,24 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
-export default {
+<script setup lang="ts">
+import { defineOptions, ref } from "vue";
+
+defineOptions({
   name: "table-column-example",
   display: "Table Column",
   order: 9,
-  components: {
-    draggable
-  },
-  data() {
-    return {
-      headers: ["id", "name", "sport"],
-      list: [
-        { id: 1, name: "Abby", sport: "basket" },
-        { id: 2, name: "Brooke", sport: "foot" },
-        { id: 3, name: "Courtenay", sport: "volley" },
-        { id: 4, name: "David", sport: "rugby" }
-      ],
-      dragging: false
-    };
-  }
-};
+});
+
+let headers = ref(["id", "name", "sport"]);
+let list = ref([
+  { id: 1, name: "Abby", sport: "basket" },
+  { id: 2, name: "Brooke", sport: "foot" },
+  { id: 3, name: "Courtenay", sport: "volley" },
+  { id: 4, name: "David", sport: "rugby" },
+]);
+
+let dragging = ref(false);
 </script>
 <style scoped>
 .buttons {

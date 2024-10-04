@@ -48,44 +48,39 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
-let id = 1;
-export default {
+<script setup lang="ts">
+import { defineOptions, ref, computed } from "vue";
+
+defineOptions({
   name: "simple",
   display: "Simple",
   order: 0,
   components: {
-    draggable
+    draggable,
   },
-  data() {
-    return {
-      enabled: true,
-      list: [
-        { name: "John", id: 0 },
-        { name: "Joao", id: 1 },
-        { name: "Jean", id: 2 }
-      ],
-      dragging: false
-    };
-  },
-  computed: {
-    draggingInfo() {
-      return this.dragging ? "under drag" : "";
-    }
-  },
-  methods: {
-    add: function() {
-      this.list.push({ name: "Juan " + id, id: id++ });
-    },
-    replace: function() {
-      this.list = [{ name: "Edgard", id: id++ }];
-    },
-    checkMove: function(e) {
-      window.console.log("Future index: " + e.draggedContext.futureIndex);
-    }
-  }
-};
+});
+
+let enabled = ref(true);
+let list = ref([
+  { name: "John", id: 0 },
+  { name: "Joao", id: 1 },
+  { name: "Jean", id: 2 },
+]);
+let dragging = ref(false);
+let id = ref(1);
+let draggingInfo = computed(() => (dragging.value ? "under drag" : ""));
+
+function add() {
+  list.value.push({ name: "Juan " + id.value, id: id.value++ });
+}
+
+function replace() {
+  list.value = [{ name: "Edgard", id: id.value++ }];
+}
+
+function checkMove(e) {
+  window.console.log("Future index: " + e.draggedContext.futureIndex);
+}
 </script>
 <style scoped>
 .buttons {

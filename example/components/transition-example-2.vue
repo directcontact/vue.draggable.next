@@ -14,7 +14,7 @@
         :component-data="{
           tag: 'ul',
           type: 'transition-group',
-          name: !drag ? 'flip-list' : null
+          name: !drag ? 'flip-list' : null,
         }"
         v-model="list"
         v-bind="dragOptions"
@@ -41,8 +41,8 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
+<script setup lang="ts">
+import { defineOptions, ref, computed } from "vue";
 
 const message = [
   "vue.draggable",
@@ -52,40 +52,33 @@ const message = [
   "vue.js 2.0",
   "based",
   "on",
-  "Sortablejs"
+  "Sortablejs",
 ];
 
-export default {
+defineOptions({
   name: "transition-example-2",
   display: "Transitions",
   order: 7,
-  components: {
-    draggable
-  },
-  data() {
-    return {
-      list: message.map((name, index) => {
-        return { name, order: index + 1 };
-      }),
-      drag: false
-    };
-  },
-  methods: {
-    sort() {
-      this.list = this.list.sort((a, b) => a.order - b.order);
-    }
-  },
-  computed: {
-    dragOptions() {
-      return {
-        animation: 200,
-        group: "description",
-        disabled: false,
-        ghostClass: "ghost"
-      };
-    }
-  }
-};
+});
+
+let drag = ref(false);
+
+let list = ref(
+  message.map((name, index) => {
+    return { name, order: index + 1 };
+  })
+);
+
+let dragOptions = computed(() => ({
+  animation: 200,
+  group: "description",
+  disabled: false,
+  ghostClass: "ghost",
+}));
+
+function sort() {
+  list.value = list.value.sort((a, b) => a.order - b.order);
+}
 </script>
 
 <style>

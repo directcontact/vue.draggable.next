@@ -41,7 +41,6 @@
 </template>
 
 <script lang="ts" setup>
-import draggable from "../../lib/vuedraggable";
 import { defineOptions, ref } from "vue";
 
 defineOptions({

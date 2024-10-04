@@ -36,39 +36,37 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
-let id = 1;
-export default {
+<script setup lang="ts">
+import { defineOptions, ref } from "vue";
+
+defineOptions({
   name: "footerslot",
   display: "Footer slot",
   order: 12,
   components: {
-    draggable
+    draggable,
   },
-  data() {
-    return {
-      list: [
-        { name: "John", id: 0 },
-        { name: "Joao", id: 1 },
-        { name: "Jean", id: 2 }
-      ],
-      dragging: false,
-      componentData: {
-        type: "transition",
-        name: "flip-list"
-      }
-    };
-  },
-  methods: {
-    add: function() {
-      this.list.push({ name: "Juan " + id, id: id++ });
-    },
-    replace: function() {
-      this.list = [{ name: "Edgard", id: id++ }];
-    }
-  }
-};
+});
+
+let list = ref([
+  { name: "John", id: 0 },
+  { name: "Joao", id: 1 },
+  { name: "Jean", id: 2 },
+]);
+let dragging = ref(false);
+let componentData = ref({
+  type: "transition",
+  name: "flip-list",
+});
+let id = ref(1);
+
+function add() {
+  list.value.push({ name: "Juan " + id, id: id.value++ });
+}
+
+function replace() {
+  list.value = [{ name: "Edgard", id: id.value++ }];
+}
 </script>
 <style scoped>
 .flip-list-move {

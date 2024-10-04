@@ -55,43 +55,40 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
-let id = 1;
-export default {
+<script setup lang="ts">
+import { defineOptions, ref } from "vue";
+
+defineOptions({
   name: "two-list-headerslots",
   display: "Two list header slot",
   order: 14,
-  components: {
-    draggable
-  },
-  data() {
-    return {
-      list: [
-        { name: "John 1", id: 0 },
-        { name: "Joao 2", id: 1 },
-        { name: "Jean 3", id: 2 }
-      ],
-      list2: [
-        { name: "Jonny 4", id: 3 },
-        { name: "Guisepe 5", id: 4 }
-      ]
-    };
-  },
-  methods: {
-    add: function() {
-      this.list.push({ name: "Juan " + id, id: id++ });
-    },
-    replace: function() {
-      this.list = [{ name: "Edgard", id: id++ }];
-    },
-    add2: function() {
-      this.list2.push({ name: "Juan " + id, id: id++ });
-    },
-    replace2: function() {
-      this.list2 = [{ name: "Edgard", id: id++ }];
-    }
-  }
-};
+});
+
+let list = ref([
+  { name: "John 1", id: 0 },
+  { name: "Joao 2", id: 1 },
+  { name: "Jean 3", id: 2 },
+]);
+let list2 = ref([
+  { name: "Jonny 4", id: 3 },
+  { name: "Guisepe 5", id: 4 },
+]);
+let id = ref(1);
+
+function add() {
+  list.value.push({ name: "Juan " + id.value, id: id.value++ });
+}
+
+function replace() {
+  list.value = [{ name: "Edgard", id: id.value++ }];
+}
+
+function add2() {
+  list2.value.push({ name: "Juan " + id.value, id: id.value++ });
+}
+
+function replace2() {
+  list2.value = [{ name: "Edgard", id: id.value++ }];
+}
 </script>
 <style scoped></style>

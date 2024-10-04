@@ -32,42 +32,37 @@
   </div>
 </template>
 
-<script>
-let id = 3;
-import draggable from "@/vuedraggable";
-export default {
+<script setup lang="ts">
+import { defineOptions, ref, computed } from "vue";
+
+defineOptions({
   name: "handle",
   display: "Handle",
   instruction: "Drag using the handle icon",
   order: 5,
   components: {
-    draggable
+    draggable,
   },
-  data() {
-    return {
-      list: [
-        { name: "John", text: "", id: 0 },
-        { name: "Joao", text: "", id: 1 },
-        { name: "Jean", text: "", id: 2 }
-      ],
-      dragging: false
-    };
-  },
-  computed: {
-    draggingInfo() {
-      return this.dragging ? "under drag" : "";
-    }
-  },
-  methods: {
-    removeAt(idx) {
-      this.list.splice(idx, 1);
-    },
-    add: function() {
-      id++;
-      this.list.push({ name: "Juan " + id, id, text: "" });
-    }
-  }
-};
+});
+
+let list = ref([
+  { name: "John", text: "", id: 0 },
+  { name: "Joao", text: "", id: 1 },
+  { name: "Jean", text: "", id: 2 },
+]);
+let dragging = ref(false);
+let id = ref(3);
+
+let draggingInfo = computed(() => (dragging.value ? "under drag" : ""));
+
+function removeAt(idx: number) {
+  list.value.splice(idx, 1);
+}
+
+function add() {
+  id.value++;
+  list.value.push({ name: "Juan " + id.value, id: id.value, text: "" });
+}
 </script>
 <style scoped>
 .button {

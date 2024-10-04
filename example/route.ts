@@ -1,5 +1,3 @@
-import { getCurrentInstance } from "vue";
-
 function getRouteFromDirectory(ctx) {
   return Object.entries(ctx).map((key, value) => ({
     path: key[0],

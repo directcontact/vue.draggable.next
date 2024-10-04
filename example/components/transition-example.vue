@@ -37,8 +37,8 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
+<script setup lang="ts">
+import { defineOptions, ref, computed } from "vue";
 const message = [
   "vue.draggable",
   "draggable",
@@ -47,40 +47,32 @@ const message = [
   "vue.js 2.0",
   "based",
   "on",
-  "Sortablejs"
+  "Sortablejs",
 ];
 let order = message.length;
 
-export default {
+defineOptions({
   name: "transition-example",
   display: "Transition",
   order: 6,
-  components: {
-    draggable
-  },
-  data() {
-    return {
-      list: message.map((name, index) => {
-        return { name, order: index + 1 };
-      })
-    };
-  },
-  methods: {
-    sort() {
-      this.list = this.list.sort((a, b) => a.order - b.order);
-    }
-  },
-  computed: {
-    dragOptions() {
-      return {
-        animation: 0,
-        group: "description",
-        disabled: false,
-        ghostClass: "ghost"
-      };
-    }
-  }
-};
+});
+
+let list = ref(
+  message.map((name, index) => {
+    return { name, order: index + 1 };
+  })
+);
+
+let dragOptions = computed(() => ({
+  animation: 0,
+  group: "description",
+  disabled: false,
+  ghostClass: "ghost",
+}));
+
+function sort() {
+  list.value = list.value.sort((a, b) => a.order - b.order);
+}
 </script>
 
 <style>

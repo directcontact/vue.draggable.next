@@ -35,37 +35,36 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
-let id = 1;
-export default {
+<script setup lang="ts">
+import { defineOptions, ref } from "vue";
+
+defineOptions({
   name: "headerslot",
   display: "Header slot",
   order: 13,
   components: {
-    draggable
+    draggable,
   },
-  data() {
-    return {
-      list: [
-        { name: "John 1", id: 0 },
-        { name: "Joao 2", id: 1 },
-        { name: "Jean 3", id: 2 }
-      ],
-      dragging: false
-    };
-  },
-  methods: {
-    add: function() {
-      this.list.push({ name: "Juan " + id, id: id++ });
-    },
-    replace: function() {
-      this.list = [{ name: "Edgard", id: id++ }];
-    },
-    log: function(evt) {
-      window.console.log(evt);
-    }
-  }
-};
+});
+
+let list = ref([
+  { name: "John 1", id: 0 },
+  { name: "Joao 2", id: 1 },
+  { name: "Jean 3", id: 2 },
+]);
+let dragging = ref(false);
+let id = ref(1);
+
+function add() {
+  list.value.push({ name: "Juan " + id.value, id: id.value++ });
+}
+
+function replace() {
+  list.value = [{ name: "Edgard", id: id.value++ }];
+}
+
+function log(evt) {
+  window.console.log(evt);
+}
 </script>
 <style scoped></style>

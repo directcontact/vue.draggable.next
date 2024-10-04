@@ -41,42 +41,42 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
-let idGlobal = 8;
-export default {
+<script setup lang="ts">
+import { defineOptions, ref } from "vue";
+
+defineOptions({
   name: "custom-clone",
   display: "Custom Clone",
   order: 3,
   components: {
-    draggable
+    draggable,
   },
-  data() {
-    return {
-      list1: [
-        { name: "dog 1", id: 1 },
-        { name: "dog 2", id: 2 },
-        { name: "dog 3", id: 3 },
-        { name: "dog 4", id: 4 }
-      ],
-      list2: [
-        { name: "cat 5", id: 5 },
-        { name: "cat 6", id: 6 },
-        { name: "cat 7", id: 7 }
-      ]
-    };
-  },
-  methods: {
-    log: function(evt) {
-      window.console.log(evt);
-    },
-    cloneDog({ id }) {
-      return {
-        id: idGlobal++,
-        name: `cat ${id}`
-      };
-    }
-  }
-};
+});
+
+let list1 = ref([
+  { name: "dog 1", id: 1 },
+  { name: "dog 2", id: 2 },
+  { name: "dog 3", id: 3 },
+  { name: "dog 4", id: 4 },
+]);
+let list2 = ref([
+  { name: "cat 5", id: 5 },
+  { name: "cat 6", id: 6 },
+  { name: "cat 7", id: 7 },
+]);
+let idGlobal = ref(8);
+
+function log(evt) {
+  window.console.log(evt);
+}
+
+function cloneDog(clonable) {
+  const { id } = clonable;
+
+  return {
+    id: idGlobal.value++,
+    name: `cat ${id}`,
+  };
+}
 </script>
 <style scoped></style>

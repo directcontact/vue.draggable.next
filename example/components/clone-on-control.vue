@@ -41,15 +41,10 @@
 </template>
 
 <script lang="ts" setup>
-import draggable from "../../lib/vuedraggable";
 import { defineOptions, ref } from "vue";
-let idGlobal = 8;
 
 defineOptions({
   name: "clone-on-control",
-  components: {
-    draggable,
-  },
   display: "Clone on Control",
   instruction: "Press Ctrl to clone element from list 1",
   order: 4,
@@ -66,11 +61,12 @@ let list2 = ref([
   { name: "John", id: 7 },
 ]);
 let controlOnStart = ref(true);
+let idGlobal = ref(8);
 
 function clone(obj) {
   const { name } = obj;
 
-  return { name, id: idGlobal++ };
+  return { name, id: idGlobal.value++ };
 }
 
 function pullFunction() {

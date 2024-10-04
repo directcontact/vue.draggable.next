@@ -27,27 +27,23 @@
   </div>
 </template>
 
-<script>
-import draggable from "@/vuedraggable";
-export default {
+<script setup lang="ts">
+import { defineOptions, ref } from "vue";
+
+defineOptions({
   name: "table-example",
   display: "Table",
   order: 8,
-  components: {
-    draggable
-  },
-  data() {
-    return {
-      list: [
-        { id: 1, name: "Abby", sport: "basket" },
-        { id: 2, name: "Brooke", sport: "foot" },
-        { id: 3, name: "Courtenay", sport: "volley" },
-        { id: 4, name: "David", sport: "rugby" }
-      ],
-      dragging: false
-    };
-  }
-};
+});
+
+let list = ref([
+  { id: 1, name: "Abby", sport: "basket" },
+  { id: 2, name: "Brooke", sport: "foot" },
+  { id: 3, name: "Courtenay", sport: "volley" },
+  { id: 4, name: "David", sport: "rugby" },
+]);
+
+let dragging = ref(false);
 </script>
 <style scoped>
 .buttons {

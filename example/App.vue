@@ -132,9 +132,9 @@ let componentList = ref(
     (key, entry) => key[1]
   )
 );
-// import $ from "jquery";
 
-// const showAll = process.env.VUE_APP_SHOW_ALL_EXAMPLES === "true";
+let showAll = ref(import.meta.env.VUE_APP_SHOW_ALL_EXAMPLES === "true");
+
 // if (showAll) {
 //   const order = Object.keys(components);
 //   const requireContextDebug = require.context(

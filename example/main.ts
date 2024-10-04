@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
+import draggable from "../lib/vuedraggable";
 import rawDisplayer from "./components/infra/raw-displayer.vue";
 import cloneOnControl from "./components/clone-on-control.vue";
 import Clone from "./components/clone.vue";
@@ -24,6 +25,7 @@ const app = createApp(App)
   .use(router)
   .use(ElementPlus)
   .component("rawDisplayer", rawDisplayer)
-  .component("CloneOnControl", cloneOnControl);
+  .component("CloneOnControl", cloneOnControl)
+  .component("draggable", draggable);
 
 router.isReady().then(() => app.mount("#app"));

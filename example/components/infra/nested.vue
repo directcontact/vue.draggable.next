@@ -14,21 +14,19 @@
     </template>
   </draggable>
 </template>
-<script>
-import draggable from "@/vuedraggable";
+<script setup lang="ts">
+import { defineProps, defineOptions } from "vue";
 
-export default {
-  props: {
-    tasks: {
-      required: true,
-      type: Array
-    }
+const props = defineProps({
+  tasks: {
+    required: true,
+    type: Array,
   },
-  components: {
-    draggable
-  },
-  name: "nested-draggable"
-};
+});
+
+defineOptions({
+  name: "nested-draggable",
+});
 </script>
 <style scoped>
 .dragArea {

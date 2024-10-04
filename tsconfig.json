@@ -14,5 +14,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "files": ["lib/vuedraggable.js"]
+  "files": ["lib/vuedraggable.ts"]
 }

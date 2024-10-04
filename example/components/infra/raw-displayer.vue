@@ -4,25 +4,24 @@
     <pre>{{ valueString }}</pre>
   </div>
 </template>
-<script>
-const props = {
+<script setup lang="ts">
+import { defineOptions, defineProps, computed } from "vue";
+
+const props = defineProps({
   title: {
     required: true,
-    type: String
+    type: String,
   },
   value: {
-    required: true
-  }
-};
-export default {
+    required: true,
+  },
+});
+
+defineOptions({
   name: "raw-displayer",
-  props,
-  computed: {
-    valueString() {
-      return JSON.stringify(this.value, null, 2);
-    }
-  }
-};
+});
+
+let valueString = computed(() => JSON.stringify(props.value, null, 2));
 </script>
 <style scoped>
 pre {
